@@ -20,7 +20,7 @@ int main()
 	srand( (unsigned)time( NULL ) );
 
     Tensor inputData;
-    __read_mnist_images(&inputData,"../data/train-images.idx3-ubyte");
+    __read_mnist_images(&inputData,"../../data/train-images.idx3-ubyte");
     Tensor inData; //28*28*1*8
     __TensorCopy(&inputData, &inData , 8);
 
