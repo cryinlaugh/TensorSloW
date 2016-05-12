@@ -7,6 +7,5 @@ The code is designed with as less dependencies as possible. Only a blas
 library is required!
 
 
-Jerry Fang @ National SuperComputing WuXi Center
-fang_jiarui@163.com
-Wenlai Zhao @ Tsinghua University
+Jerry Fang @ National SuperComputing WuXi Center fang_jiarui@163.com
+Wenlai Zhao @ Tsinghua University cryinlaugh@126.com
