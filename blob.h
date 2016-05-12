@@ -36,20 +36,21 @@ typedef struct{
 	real* data;
 }Tensor;
 
-void __TensorLoadData(Tensor* T, char* filename);
+void __TensorLoadData(Tensor* T, char* const filename);
 
 void __TensorLoadB(Tensor* b, char* filename);
 
-void __TensorLoadWeight(Tensor* W, char* filename);
+void __TensorLoadWeight(Tensor* W, char* const filename);
 
 void __TensorCopy(Tensor* TA, Tensor* TB, int numImg);
 
 void __TensorDataInit(Tensor* T, int R, int C, int N, int B);
+void __TensorDataInitRandom(Tensor* T, real lower_bound, real upper_bound);
 
-void __TensorPrint(Tensor* T, char* filename);
+void __TensorPrint(Tensor* T, char* const filename);
 
-void __TensorCheckRes(char* fn1, char* fn2);
+void __TensorCheckRes(char* const fn1, char* const fn2);
 
-void __TensorPrint(Tensor* const T, char* filename);
+void __TensorPrint(Tensor* const T, char* const filename);
 
 #endif

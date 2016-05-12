@@ -6,6 +6,7 @@ extern "C"{
   #include "cnnConvolutionImp.h"
 }
 #include <cstdlib>
+#include <math.h>
 
 
 class convLayer{
@@ -32,23 +33,35 @@ public:
       dW.size = dW.K1*dW.K2*dW.Ni*dW.No;
       
       b.N = out->N; //?
-      db.N = out->N;
+      b.size = b.N; //unexpanded
+      db.N = b.N;
+      db.size = db.N;
 
       W.data = (real*)malloc(REALSIZE*W.size);
       dW.data = (real*)malloc(REALSIZE*dW.size);
-      b.data = (real*)malloc(REALSIZE*b.N);
-      db.data = (real*)malloc(REALSIZE*db.N);
+      b.data = (real*)malloc(REALSIZE*b.size);
+      db.data = (real*)malloc(REALSIZE*db.size);
 
       input = in;
       output = out;
 
 
   }
-  void setWeightFromFile(char* Wfile, char*bfile){
+  void setWeightFromFile(char* const Wfile, char * const bfile){
       __TensorLoadWeight(&W, Wfile);
       __TensorLoadB(&b, bfile);   
   }
 
+    //init weight's randomly between [-sqrt(6/(fanout+fanin)), sqrt(6/(fanout+fanin))]
+    //init bias to 0
+    void initWeightRandom(){
+        int fan_out = W.K1*W.K2*W.No;
+        int fan_in = W.K1*W.K2*W.Ni;
+        real bound = sqrt(6/double(fan_out+fan_in));
+        __TensorDataInitRandom(&W, -bound, bound);
+        memset(b.data, 0, REALSIZE*b.size);
+    }
+    
   void setDown(){
     free(W.data);
     free(b.data);
@@ -56,7 +69,7 @@ public:
     free(db.data);
   }
 
-  void forward(){
+  void forward(int profile){
       //__convForward(&col_data, &W, &b, output);
       if(true){
         __forward_im2col(input, &W, &col_data);
@@ -65,8 +78,8 @@ public:
         __convForward2(input, &W, &b, output);
       }
       printf("forward is ok\n");
-      __TensorPrint(output, "./log/ftr.txt");
-      __TensorCheckRes("./log/ftr.txt", "../testdata/convfp/convolvedFeatures.txt");
+      //__TensorPrint(output, "./log/ftr.txt");
+      //__TensorCheckRes("./log/ftr.txt", "../testdata/convfp/convolvedFeatures.txt");
   }
 
   void backward(){

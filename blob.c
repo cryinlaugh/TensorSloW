@@ -57,6 +57,13 @@ void __TensorDataInit(Tensor* T, int R, int C, int N, int B){
 	T->data = (real*)malloc(REALSIZE*R*C*N*B);
 }
 
+void __TensorDataInitRandom(Tensor* T, real lower_bound, real upper_bound){
+    srand( (unsigned)time( NULL ) );
+    for (int i=0; i<T->size; i++) {
+        *(T->data+i) = (rand()/(real)RAND_MAX)*(upper_bound-lower_bound)+lower_bound;
+    }
+}
+
 void __TensorPrint(Tensor* const T, char* const filename){
 	int size = T->size;
 
