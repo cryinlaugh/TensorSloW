@@ -1,6 +1,6 @@
 #include "cnnPoolingImp.h"
 
-void __forwardPooling(Tensor* const input, Tensor* const output, real* W, int poolRow, int poolCol, char* pooltype){
+void __forwardPooling(Tensor* const input, Tensor* const output, real* W, int poolRow, int poolCol, char * const pooltype){
 	int B = input->B;
 	int N = input->N;
 	int R = input->R;

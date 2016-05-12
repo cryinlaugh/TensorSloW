@@ -80,12 +80,14 @@ void __backward_im2col(Tensor* const in, Tensor* const W, Tensor* col_data_full)
 					for(int nr=0; nr < K2; ++nr)
 						for(int nc=0; nc < K1; ++nc){
 
+                            //global c/r : index of delta_x
 							int gc = ic+K1-1-nc;  //ic+K1-1-nc; //ic+K1-nc; //ic+nc;
 							int gr = ir+K2-1-nr;  //ir+K2-1-nr; //ir+K2-nr; //ir+nr;
 							/*
 							int gc = ic+nc; //ic+K1-1-nc; //ic+K1-nc; //ic+nc;
 							int gr = ir+nr; //ir+K2-1-nr; //ir+K2-nr; //ir+nr;
 							*/
+                            //local c/r : index of deltar_z
 							int lc = gc-K1+1;
 							int lr = gr-K2+1;
 
