@@ -9,6 +9,8 @@ all: $(OBJS)
 		$(CXX) $(CFLAGS) -c $< -I.
 %.o: %.c
 		$(GCC) $(CFLAGS) -c $< -I.
+run: all
+	make -C ./unitest run
 
 clean:
 		rm *.o

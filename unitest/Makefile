@@ -4,6 +4,9 @@ CFLAGS = -O3
 
 #cd .. && make all && cd unitest
 
+
+run: all
+	./testconvfp
 all: testconvfp
 testconvbp: ../mnist.o ../cnnConvolutionImp.o ../cnnPoolingImp.o ../blob.o testconvbp.o /opt/OpenBlas/lib/libopenblas.a
 		$(CXX) $(CFLAGS) $^ -o $@ -I.  -L/opt/OpenBLAS/lib -lopenblas -lpthread
