@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-void __TensorLoadData(Tensor* T, char* const filename){
+void __TensorLoadData(Tensor* T, char const* filename){
 	FILE * fh = fopen(filename, "r");
 	if(!fh)
 		printf("no data file!\n");
@@ -12,7 +12,7 @@ void __TensorLoadData(Tensor* T, char* const filename){
 	fclose(fh);
 }
 
-void __TensorLoadB(Tensor* b, char* const filename){
+void __TensorLoadB(Tensor* b, char const* filename){
 	printf("bias size is %d\n", b->N);
 	FILE * fh = fopen(filename, "r");
 	if(!fh)
@@ -23,7 +23,7 @@ void __TensorLoadB(Tensor* b, char* const filename){
 	fclose(fh);
 }
 
-void __TensorLoadWeight(Tensor* W, char* const filename){
+void __TensorLoadWeight(Tensor* W, char const* filename){
 
 	int size = W->size;
 	W->data = (real*)malloc(REALSIZE*size);
@@ -64,7 +64,7 @@ void __TensorDataInitRandom(Tensor* T, real lower_bound, real upper_bound){
     }
 }
 
-void __TensorPrint(Tensor* const T, char* const filename){
+void __TensorPrint(Tensor * T, char const* filename){
 	int size = T->size;
 
 	FILE * fh = fopen(filename, "w");
@@ -74,7 +74,7 @@ void __TensorPrint(Tensor* const T, char* const filename){
 	fclose(fh);
 }
 
-void __TensorCheckRes(char* const fn1, char* const fn2){
+void __TensorCheckRes(char const* fn1, char const* fn2){
 	FILE * f1 = fopen(fn1, "r");
 	FILE * f2 = fopen(fn2, "r");
 

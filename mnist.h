@@ -3,8 +3,8 @@
 
 #include "blob.h"
 
-void read_mnist_images(char* fileName, Blob * inputData);
+void read_mnist_images(char const* fileName, Blob * inputData);
 
-void __read_mnist_images(Tensor * inputData, char* fileName);
+void __read_mnist_images(Tensor * inputData, char const* fileName);
 
 #endif  // CAFFE_BLOB_HPP_

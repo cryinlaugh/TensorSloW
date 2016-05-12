@@ -14,4 +14,5 @@ run: all
 
 clean:
 		rm *.o
+		make -C ./unitest clean
 

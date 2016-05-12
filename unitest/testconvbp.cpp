@@ -34,7 +34,7 @@ int main()
     C1.setUp( &inputData, &outputData, filterDim, filterDim);
     C1.setWeightFromFile("../testdata/convbp/W.txt","../testdata/convbp/b.txt");
     printf("setup is ok\n");
-    C1.backward();
+    C1.backward(1,1);
     //C1.checkBp(); //TODO
 
 

@@ -48,7 +48,7 @@ int main()
     
     printf("[INFO]Run Forward\n");
     gettimeofday(&start, NULL);
-    C1.forward();
+    C1.forward(1,1);
     gettimeofday(&finish, NULL);
     duration = ((float)(finish.tv_sec-start.tv_sec)*1000000 + (float)(finish.tv_usec-start.tv_usec)) / 1000000;
     printf("[INFO]Finish Forward.\n");

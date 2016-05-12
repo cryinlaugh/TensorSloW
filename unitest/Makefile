@@ -20,6 +20,6 @@ testconvrand: ../mnist.o ../cnnConvolutionImp.o ../cnnPoolingImp.o ../blob.o tes
 		$(GCC) $(CFLAGS) -c $< -I..
 
 clean:
-		rm *.o testconvbp testconvfp
+		rm *.o testconvbp testconvfp testconvrand
 		rm -rf log/*
 

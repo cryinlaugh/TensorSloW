@@ -3,6 +3,6 @@
 
 #include "blob.h"
 
-void __forwardPooling(Tensor* const input, Tensor* const output, real* W, int poolRow, int poolCol, char* const pooltype);
+void __forwardPooling(Tensor* const input, Tensor* const output, real* W, int poolRow, int poolCol, char const* pooltype);
 
 #endif

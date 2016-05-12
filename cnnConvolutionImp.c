@@ -43,7 +43,7 @@ void __forward_im2col(Tensor* const in, Tensor* const W, Tensor* col_data){
 			}
 		}
 	}
-	printf("data size is %d\n", col_data->size);
+	//printf("data size is %d\n", col_data->size);
 }
 
 void __backward_im2col(Tensor* const in, Tensor* const W, Tensor* col_data_full){
@@ -111,18 +111,18 @@ void __convForward(Tensor* const col_data, Tensor* const Weight, Tensor* const b
 	int m = ConvData->R*ConvData->C*ConvData->B;
 	int k = Weight->K1*Weight->K2*Weight->Ni;
 
-	printf("m: %d, n: %d, k: %d\n", m, n, k);
+	//printf("m: %d, n: %d, k: %d\n", m, n, k);
 
 	char ta = 'T';
-  	char tb = 'N';
-  	real alpha = 1.0;
-  	real beta = 0.0;
-  	real* tmp = (real *)malloc(REALSIZE*(ConvData->size));
-  	printf("before sgemm, W: %d, col_data: %d\n", Weight->size, col_data->size);
+	char tb = 'N';
+	real alpha = 1.0;
+	real beta = 0.0;
+	real* tmp = (real *)malloc(REALSIZE*(ConvData->size));
+	//printf("before sgemm, W: %d, col_data: %d\n", Weight->size, col_data->size);
 	sgemm_(&ta, &tb, &m, &n, &k, &alpha, col_data->data, &k, Weight->data, &k, &beta, tmp, &m);
 	//data_col fR*fC*cha * oR*oR*numImg
 	//W.data fR*fC*cha * numFilter
-	printf("sgemm_ is ok\n");
+	//printf("sgemm_ is ok\n");
 	for(int img = 0; img<ConvData->B; ++img)
 		for(int flt = 0; flt < ConvData->N; ++flt)
 			for(int r = 0; r < ConvData->R; ++r )
@@ -134,7 +134,7 @@ void __convForward(Tensor* const col_data, Tensor* const Weight, Tensor* const b
 
 
 	free(tmp);
-	printf("cnnConvolution2\n");
+	//printf("cnnConvolution2\n");
 }
 
 

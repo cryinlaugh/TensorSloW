@@ -17,7 +17,7 @@ int ConvertCharArrayToInt(unsigned char* array, int LengthOfArray)
     return result;  
 }  
 
-void __read_mnist_images(Tensor * inputData, char* fileName)
+void __read_mnist_images(Tensor * inputData, char const* fileName)
 {
   FILE* ifs = fopen(fileName, "rb");
   unsigned char magic_number[4];
@@ -57,7 +57,7 @@ void __read_mnist_images(Tensor * inputData, char* fileName)
 }
 
 
-void read_mnist_images(char* fileName, Blob * inputData)
+void read_mnist_images(char const* fileName, Blob * inputData)
 {
   FILE* ifs = fopen(fileName, "rb");
   unsigned char magic_number[4];
