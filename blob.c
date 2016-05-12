@@ -1,7 +1,8 @@
 #include "blob.h"
 #include <math.h>
+#include <stdlib.h>
 
-void __TensorLoadData(Tensor* T, char* filename){
+void __TensorLoadData(Tensor* T, char* const filename){
 	FILE * fh = fopen(filename, "r");
 	if(!fh)
 		printf("no data file!\n");
@@ -11,7 +12,7 @@ void __TensorLoadData(Tensor* T, char* filename){
 	fclose(fh);
 }
 
-void __TensorLoadB(Tensor* b, char* filename){
+void __TensorLoadB(Tensor* b, char* const filename){
 	printf("bias size is %d\n", b->N);
 	FILE * fh = fopen(filename, "r");
 	if(!fh)
@@ -22,7 +23,7 @@ void __TensorLoadB(Tensor* b, char* filename){
 	fclose(fh);
 }
 
-void __TensorLoadWeight(Tensor* W, char* filename){
+void __TensorLoadWeight(Tensor* W, char* const filename){
 
 	int size = W->size;
 	W->data = (real*)malloc(REALSIZE*size);
@@ -30,7 +31,6 @@ void __TensorLoadWeight(Tensor* W, char* filename){
 	FILE * fh = fopen(filename, "r");
 	if(!fh){
 		printf("no Weight file!\n");
-		exit(0);
 	}
 	for(int i=0; i<size; ++i){
 		fscanf(fh, "%f", W->data+i);
@@ -57,7 +57,7 @@ void __TensorDataInit(Tensor* T, int R, int C, int N, int B){
 	T->data = (real*)malloc(REALSIZE*R*C*N*B);
 }
 
-void __TensorPrint(Tensor* const T, char* filename){
+void __TensorPrint(Tensor* const T, char* const filename){
 	int size = T->size;
 
 	FILE * fh = fopen(filename, "w");
@@ -67,7 +67,7 @@ void __TensorPrint(Tensor* const T, char* filename){
 	fclose(fh);
 }
 
-void __TensorCheckRes(char* fn1, char* fn2){
+void __TensorCheckRes(char* const fn1, char* const fn2){
 	FILE * f1 = fopen(fn1, "r");
 	FILE * f2 = fopen(fn2, "r");
 

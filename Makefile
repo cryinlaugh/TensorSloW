@@ -1,14 +1,15 @@
 CXX = g++
 GCC = gcc
 CFLAGS = -O3
+OBJS = mnist.o cnnConvolutionImp.o cnnPoolingImp.o innerprodImp.o blob.o
 
-all: mnist.o cnnConvolutionImp.o cnnPoolingImp.o blob.o /opt/OpenBlas/lib/libopenblas.a
-#		$(CXX) $(CFLAGS) $^ -o $@ -I.  -L/opt/OpenBLAS/lib -lopenblas -lpthread
+all: $(OBJS)
+
 %.o: %.cpp
 		$(CXX) $(CFLAGS) -c $< -I.
 %.o: %.c
 		$(GCC) $(CFLAGS) -c $< -I.
-run:
+run: all
 	make -C ./unitest run
 
 clean:
