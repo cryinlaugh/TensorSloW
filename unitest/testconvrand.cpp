@@ -26,7 +26,7 @@ int main()
     //Total FLOP:
     long long flop = 2*No*Ro*Co*K*K*Ni*B;
 	
-		printf("flop = %ld \n", flop);
+		printf("flop = %lld \n", flop);
 	
     struct timeval start,finish;
     float duration;

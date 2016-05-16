@@ -267,8 +267,6 @@ void __convForward21(Tensor* const input, Tensor* const Weight, Tensor* const b,
 	printf("\t[INFO]Begin loop\n");
 	for (int cB=0; cB<B; ++cB) {
 		
-		
-		
 		real* inputDataBatch = input->data + cB * Ri*Ci*Ni;
 		real* outputDataBatch = output->data + cB * Ro*Co*No;
 		

@@ -109,8 +109,8 @@ public:
 			}
 		}
 		
-		//__TensorPrint(output, "./log/bpconveddata.txt");
-		//__TensorCheckRes("./log/bpconveddata.txt", "../testdata/convfp/res.txt");
+		//__TensorPrint(output, "./log/fpconveddata.txt");
+		//__TensorCheckRes("./log/fpconveddata.txt", "../testdata/convfp/res.txt");
   }
 
   void backward(int pattern, int profile){
@@ -127,8 +127,8 @@ public:
 			printf("\t[INFO]Time: %.6f sec\n", duration);
 		}
 
-		//__TensorPrint(&col_data_full, "./log/col_data_full.txt");
-		//__TensorCheckRes("./log/col_data_full.txt", "../testdata/convbp/col_data.txt");
+		__TensorPrint(&col_data_full, "./log/col_data_full.txt");
+		__TensorCheckRes("./log/col_data_full.txt", "../testdata/convbp/col_data.txt");
 		if (profile == 1) {
 			gettimeofday(&start, NULL);
 		}
@@ -140,8 +140,8 @@ public:
 			printf("\t[INFO]Time: %.6f sec\n", duration);
 		}
 
-		//__TensorPrint(output, "./log/bpconveddata.txt");
-		//__TensorCheckRes("./log/bpconveddata.txt", "../testdata/convbp/res.txt");
+		__TensorPrint(output, "./log/bpconveddata.txt");
+		__TensorCheckRes("./log/bpconveddata.txt", "../testdata/convbp/res.txt");
   }
 
 };
