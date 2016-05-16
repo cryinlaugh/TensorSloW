@@ -14,18 +14,20 @@ extern "C"{
 int main()
 {
     
-    int Ni = 1024;
-    int Ri = 28;
-    int Ci = 28;
+    int Ni = 64;
+    int Ri = 32;
+    int Ci = 32;
     int K = 4;
-    int No = 20;
+    int No = 64;
     int Ro = Ri-K+1;
     int Co = Ci-K+1;
-    int B = 64;
+    int B = 2;
     
     //Total FLOP:
-    int flop = 2*No*Ro*Co*K*K*Ni*B;
-    
+    long long flop = 2*No*Ro*Co*K*K*Ni*B;
+	
+		printf("flop = %ld \n", flop);
+	
     struct timeval start,finish;
     float duration;
 
@@ -48,7 +50,7 @@ int main()
     
     printf("[INFO]Run Forward\n");
     gettimeofday(&start, NULL);
-    C1.forward(1,1);
+    C1.forward(0,1);
     gettimeofday(&finish, NULL);
     duration = ((float)(finish.tv_sec-start.tv_sec)*1000000 + (float)(finish.tv_usec-start.tv_usec)) / 1000000;
     printf("[INFO]Finish Forward.\n");

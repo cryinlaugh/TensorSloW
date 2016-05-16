@@ -30,7 +30,7 @@ int main()
     __TensorDataInit(&C1Data,21,21,3,8);
     C1.setUp( &inData, &C1Data, filterDim, filterDim);
     C1.setWeightFromFile("../testdata/convfp/W.txt","../testdata/convfp/b.txt");
-    C1.forward(1,1);
+    C1.forward(0,1);
 
 
     Tensor P1Data;

@@ -100,7 +100,7 @@ public:
 			if (profile == 1) {
 				gettimeofday(&start, NULL);
 			}
-			__convForward2(input, &W, &b, output);
+			__convForward21(input, &W, &b, output);
 			if (profile == 1) {
 				gettimeofday(&finish, NULL);
 				duration = ((float)(finish.tv_sec-start.tv_sec)*1000000 + (float)(finish.tv_usec-start.tv_usec)) / 1000000;
@@ -108,6 +108,9 @@ public:
 				printf("\t[INFO]Time: %.6f sec\n", duration);
 			}
 		}
+		
+		//__TensorPrint(output, "./log/bpconveddata.txt");
+		//__TensorCheckRes("./log/bpconveddata.txt", "../testdata/convfp/res.txt");
   }
 
   void backward(int pattern, int profile){

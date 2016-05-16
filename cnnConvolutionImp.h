@@ -10,6 +10,7 @@ void __convForward(Tensor* const col_data, Tensor* const Weight, Tensor* const b
 void __convBackward(Tensor* const col_data_full, Tensor* const Weight, Tensor* const b, Tensor* currError);
 
 void __convForward2(Tensor* const col_data, Tensor* const Weight, Tensor* const b, Tensor* ConvData);
+void __convForward21(Tensor* const col_data, Tensor* const Weight, Tensor* const b, Tensor* ConvData);
 void __convBackward2(Tensor* const prevError, Tensor* const W, Tensor* currError);
 
 #endif

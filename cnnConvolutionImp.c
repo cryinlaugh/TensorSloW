@@ -236,6 +236,87 @@ void __convForward2(Tensor* const input, Tensor* const Weight, Tensor* const b, 
 	free(convolvedImage);
 }
 
+void __convForward21(Tensor* const input, Tensor* const Weight, Tensor* const b, Tensor* output)
+{
+	int stride = 1; //not implement
+	
+	//[filterDimRow,filterDimCosl,channel,numFilters] = size(W);
+	int K = Weight->K2; // K2===K1
+	int Ni = Weight->Ni;
+	int No = Weight->No;
+	
+	//[imageDimRow, imageDimCol,~, numImages] = size(images);
+	int Ri = input->R;
+	int Ci = input->C;
+	int Ro = (Ri-K+1)/stride;
+	int Co = (Ci-K+1)/stride;
+	int B = input->B;
+	
+	real* inputData = input->data;
+	real* outputData = output->data;
+	real* weightData = Weight->data;
+	
+	printf("\t[INFO]Finish init parameters\n");
+	
+	if(output->R != Ro || output->C != Co || output->N != No || output->B != B) {
+		printf("Wring output dim\n");
+	}
+	
+	real* tmpOutputFM = (real*) malloc(REALSIZE*Ro*Co);
+	
+	printf("\t[INFO]Begin loop\n");
+	for (int cB=0; cB<B; ++cB) {
+		
+		
+		
+		real* inputDataBatch = input->data + cB * Ri*Ci*Ni;
+		real* outputDataBatch = output->data + cB * Ro*Co*No;
+		
+		
+		#pragma acc parallel loop
+		for (int cNo=0; cNo<No; ++cNo) {
+			
+			real* outputFM = outputDataBatch + cNo * Ro*Co;
+			real* weightNo = weightData + cNo * Ni*K*K; //size: Ni*K*K
+			
+			
+			memset(tmpOutputFM, *(b->data+No), REALSIZE*Ro*Co);
+			
+			for (int cNi=0; cNi<Ni; ++cNi) {
+				
+				//printf("\t[INFO]In loop cNo = %d, cNi = %d\n", cNo, cNi);
+				
+				real* inputFM = inputDataBatch + cNi * Ri*Ci;
+				real* weightNoNi = weightNo + cNi * K*K; //size: K*K
+				
+				for (int cRi=0; cRi<Ri; ++cRi) {
+					for (int cCi=0; cCi<Ci; ++cCi) {
+						real tmpV = *(inputFM+cRi*Ci+cCi);
+						for (int cK1=0; cK1<K; ++cK1) {
+							for (int cK2=0; cK2<K; ++cK2) {
+								int tmpcRo = cRi-cK1;
+								int tmpcCo = cCi-cK2;
+								if (!(tmpcRo<0) && tmpcRo<Ro && !(tmpcCo<0) && tmpcCo<Co) {
+									*(tmpOutputFM + tmpcRo*Co + tmpcCo) += tmpV*(*(weightNoNi + cK1*K + cK2));
+								}
+							}
+						}
+					}
+				}
+				
+			}
+			
+			memcpy(outputFM, tmpOutputFM, REALSIZE*Ro*Co);
+			
+		}
+		
+	}
+	
+	free(tmpOutputFM);
+	
+}
+
+
 //A Naive implementation of convolution backward propogation
 void __convBackward2(Tensor* const prevError, Tensor* const W, Tensor* currError){
 	int pR = prevError->R;
